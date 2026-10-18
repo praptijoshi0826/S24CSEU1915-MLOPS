@@ -20,7 +20,14 @@ class Order(BaseModel):
     traffic_level: int = Field(..., ge=1, le=3)
     rain: int = Field(..., ge=0, le=1)
 
-
+@app.get("/")
+def home():
+    return {
+        "message": "Delivery Time Predictor API is running",
+        "docs": "/docs",
+        "health": "/health",
+        "prediction_endpoint": "/predict"
+    }
 @app.get("/health")
 def health():
     return {"status": "ok", "model_loaded": model is not None}
